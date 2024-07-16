@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Screed - Ahmed Asiri</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid green;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>15 Screed - Ahmed Asiri</h2>
+
+<table id="dataTable">
+    <tr>
+        <th>Image Number</th>
+        <th>Type</th>
+        <th>Kilometer Marker</th>
+        <th>Time</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Vs</td>
+        <td>Km 122+408.96</td>
+        <td>11:26 AM</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Ds</td>
+        <td>Km 122+617.69</td>
+        <td>11:26 AM</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Ds</td>
+        <td>Km 124+285.07</td>
+        <td>11:30 AM</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Ds</td>
+        <td>Km 116+141.62</td>
+        <td>10:49 AM</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Ds</td>
+        <td>Km 119+966.78</td>
+        <td>11:19 AM</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Ds</td>
+        <td>Km 122+359.93</td>
+        <td>11:26 AM</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Vs</td>
+        <td>Km 109+853.15</td>
+        <td>10:18 AM</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Vs</td>
+        <td>Km 111+206.20</td>
+        <td>10:18 AM</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Ds</td>
+        <td>Km 115+632.06</td>
+        <td>10:48 AM</td>
+    </tr>
+</table>
+
+<br>
+
+<button class="button" onclick="printTable()">Print</button>
+<button class="button" onclick="copyTable()">Copy Content</button>
+<button class="button" onclick="sendWhatsApp()">Send via WhatsApp</button>
+
+<script>
+    function printTable() {
+        const printContent = document.getElementById('dataTable').outerHTML;
+        const printWindow = window.open('', '', 'height=500, width=500');
+        printWindow.document.write('<html><head><title>Print Table</title>');
+        printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } table, th, td { border: 1px solid green; } th, td { padding: 10px; text-align: left; } th { background-color: #4CAF50; color: white; } tr:nth-child(even) { background-color: #f2f2f2; }</style>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    function copyTable() {
+        const range = document.createRange();
+        range.selectNode(document.getElementById("dataTable"));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        alert("Table content copied to clipboard!");
+    }
+
+    function sendWhatsApp() {
+        const tableText = document.getElementById('dataTable').innerText;
+        const whatsappMessage = encodeURIComponent(tableText);
+        const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
